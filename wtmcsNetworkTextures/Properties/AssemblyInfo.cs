@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("wtmcsNetworkTextures")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Network Textures")]
+[assembly: AssemblyDescription("Does things with Cities: Skylines network textures")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("wtmcsNetworkTextures")]
-[assembly: AssemblyCopyright("Copyright ©  2016")]
+[assembly: AssemblyProduct("What the Mod! Cities: Skylines Network Textures")]
+[assembly: AssemblyCopyright("Copyright © Jonas Eckerman")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("e410752d-7e0c-4c01-afa1-56144605f8f3")]
+[assembly: Guid("59ae1cdb-6385-4708-bb3b-2fb3a13f9bc4")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("1.1.*")]
+////[assembly: AssemblyFileVersion("1.0.0.0")]
