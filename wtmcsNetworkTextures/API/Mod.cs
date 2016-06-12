@@ -54,8 +54,8 @@ namespace WhatThe.Mods.CitiesSkylines.NetworkTextures.API
                     {
                         Log.Debug(this, "OnSettingsUI", "ExportMappedTextures");
 
-                        Exporter exporter = new Exporter();
-                        exporter.ExportMappedTextures();
+                        Exporter exporter = new Exporter(Exporter.ExportMode.Mapped);
+                        exporter.ExportTextures();
                     });
 
                 group.AddButton(
@@ -64,8 +64,8 @@ namespace WhatThe.Mods.CitiesSkylines.NetworkTextures.API
                     {
                         Log.Debug(this, "OnSettingsUI", "ExportSeparateTextures");
 
-                        Exporter exporter = new Exporter();
-                        exporter.ExportSeparateTextures();
+                        Exporter exporter = new Exporter(Exporter.ExportMode.Separate);
+                        exporter.ExportTextures();
                     });
             }
             catch (Exception ex)

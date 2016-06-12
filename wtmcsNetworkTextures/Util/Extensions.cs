@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -10,6 +11,11 @@ namespace WhatThe.Mods.CitiesSkylines.NetworkTextures.Util
     /// </summary>
     public static class Extensions
     {
+        /// <summary>
+        /// The bad file name characters.
+        /// </summary>
+        private static Regex badFileNameChars = null;
+
         /// <summary>
         /// Get only ASCII capitals.
         /// </summary>
@@ -83,6 +89,83 @@ namespace WhatThe.Mods.CitiesSkylines.NetworkTextures.Util
         public static object CastToBase(this object obj)
         {
             return obj.CastTo(obj.GetType().BaseType);
+        }
+
+        /// <summary>
+        /// Cleans the file name.
+        /// </summary>
+        /// <param name="fileName">The file name.</param>
+        /// <param name="replacement">The replacement string for bad characters.</param>
+        /// <returns>The clean file name.</returns>
+        public static string CleanFileName(this string fileName, string replacement = "!")
+        {
+            if (fileName == null)
+            {
+                return null;
+            }
+
+            if (badFileNameChars == null)
+            {
+                badFileNameChars = new Regex("([" + Regex.Escape(new String(Path.GetInvalidFileNameChars())) + "])", RegexOptions.CultureInvariant);
+            }
+
+            return badFileNameChars.Replace(fileName, replacement);
+        }
+
+        /// <summary>
+        /// Cleans the file path.
+        /// </summary>
+        /// <param name="filePath">The file path.</param>
+        /// <param name="replacement">The replacement string for bad characters.</param>
+        /// <returns>The clean file path.</returns>
+        public static string CleanFilePath(this string filePath, string replacement = "!")
+        {
+            if (filePath == null)
+            {
+                return null;
+            }
+
+            int i = 0;
+            StringBuilder cleanPath = new StringBuilder();
+
+            int p = (i >= filePath.Length) ? -1 : filePath.IndexOf(Path.VolumeSeparatorChar, i);
+            if (p >= i)
+            {
+                cleanPath.Append(filePath.Substring(i, p - i).CleanFileName(replacement)).Append(Path.VolumeSeparatorChar);
+                i = p + 1;
+            }
+
+            while (i < filePath.Length)
+            {
+                p = filePath.IndexOf(Path.DirectorySeparatorChar, i);
+
+                if (Path.AltDirectorySeparatorChar == Path.DirectorySeparatorChar)
+                {
+                    int pa = filePath.IndexOf(Path.AltDirectorySeparatorChar, i);
+
+                    if (pa >= i && (pa < p || p < i))
+                    {
+                        p = pa;
+                    }
+                }
+
+                if (p < i)
+                {
+                    break;
+                }
+                else
+                {
+                    cleanPath.Append(filePath.Substring(i, p - i).CleanFileName(replacement)).Append(Path.DirectorySeparatorChar);
+                    i = p + 1;
+                }
+            }
+
+            if (i < filePath.Length)
+            {
+                cleanPath.Append(filePath.Substring(i).CleanFileName(replacement));
+            }
+
+            return cleanPath.ToString();
         }
 
         /// <summary>

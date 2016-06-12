@@ -39,6 +39,7 @@ xcopy /f /y "%TARGETFILENAME%" "%MODPATH%"
 
 :NOGAME
 
-zip -u -j -9 -o -X "..\..\..\NetworkTexturesWTM.zip" "..\..\..\README.md" "..\..\Dox\PreviewImage.png" "%TARGETFILENAME%"
+zip -u -j -9 -o -X "..\..\..\NetworkTexturesWTM.zip" "%TARGETFILENAME%"
+rem "..\..\..\README.md" "..\..\Dox\PreviewImage.png"
 
 :END
